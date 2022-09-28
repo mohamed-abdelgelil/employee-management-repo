@@ -1,2 +1,5 @@
 # employee-management-repo
-managing the employee registration process and maintaining  employment state transitions 
+
+#summery
+this repo contains the needed service to manage the employee registration process and maintains employment state transitions 
+
