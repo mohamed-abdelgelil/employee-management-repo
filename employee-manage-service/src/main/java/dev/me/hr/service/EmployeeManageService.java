@@ -1,13 +1,20 @@
 package dev.me.hr.service;
 
-import dev.me.hr.model.Employee;
+import java.util.List;
+
+import dev.me.hr.dto.EmployeeDTO;
+import dev.me.hr.model.EmployeeState;
 
 public interface EmployeeManageService {
 
-	Employee registerEmployee(Employee employee);
+	EmployeeDTO registerEmployee(EmployeeDTO employee);
 
-	Employee getEmployee(Long employeeID);
+	EmployeeDTO getEmployee(Long employeeID);
 
 	void updateEmployeeToNextState(Long employeeID);
+
+	List<EmployeeDTO> getAllEmployees();
+
+	List<EmployeeDTO> getAllEmployeesByState(EmployeeState employeeState);
 
 }
