@@ -1,33 +1,27 @@
-package dev.me.hr.model;
+package dev.me.hr.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-@Entity
-public class Employee {
+import dev.me.hr.model.EmployeeState;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 732852228261714585L;
+
 	private Long id;
 	private String fullName;
 	private int age;
-
-	@Enumerated(EnumType.STRING)
 	private EmployeeState state;
 
-	public Employee(String fullName, int age, EmployeeState state) {
+	public EmployeeDTO(Long id, String fullName, int age, EmployeeState state) {
 		super();
+		this.id = id;
 		this.fullName = fullName;
 		this.age = age;
 		this.state = state;
-	}
-
-	public Employee() {
-		super();
 	}
 
 	public Long getId() {
