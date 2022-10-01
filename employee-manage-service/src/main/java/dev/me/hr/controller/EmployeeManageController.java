@@ -16,32 +16,33 @@ import dev.me.hr.model.EmployeeState;
 import dev.me.hr.service.EmployeeManageService;
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeManageController {
 
 	@Autowired
 	private EmployeeManageService employeeManageService;
 
-	@RequestMapping(value = "/employee", method = RequestMethod.POST, headers = "Accept=application/json")
+	@RequestMapping( method = RequestMethod.POST, headers = "Accept=application/json")
 	public EmployeeDTO registerEmployee(@RequestBody EmployeeDTO employeeDTO) {
 		return employeeManageService.registerEmployee(employeeDTO);
 	}
 
-	@RequestMapping(value = "/employee", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping( method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<EmployeeDTO> getEmployees() {
 		return employeeManageService.getAllEmployees();
 	}
 
-	@RequestMapping(value = "/employee/{employeeID}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/{employeeID}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public EmployeeDTO getEmployee(@PathVariable Long employeeID) {
 		return employeeManageService.getEmployee(employeeID);
 	}
 
-	@RequestMapping(value = "/employee/state/{employeeState}", method = RequestMethod.GET, headers = "Accept=application/json")
+	@RequestMapping(value = "/state/{employeeState}", method = RequestMethod.GET, headers = "Accept=application/json")
 	public List<EmployeeDTO> getEmployees(@PathVariable EmployeeState employeeState) {
 		return employeeManageService.getAllEmployeesByState(employeeState);
 	}
 
-	@RequestMapping(value = "/employee", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping( method = RequestMethod.PUT, headers = "Accept=application/json")
 	public void updateEmployeeToNextState(@RequestParam Long employeeID, @RequestParam EmployeeEvent employeeEvent) {
 		employeeManageService.updateEmployeeState(employeeID, employeeEvent);
 	}

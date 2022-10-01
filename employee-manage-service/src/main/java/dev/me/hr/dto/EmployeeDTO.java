@@ -17,6 +17,8 @@ public class EmployeeDTO implements Serializable {
 	private Long id;
 	private String fullName;
 	private int age;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private EmployeeState state;
 	
 	@JsonInclude(JsonInclude.Include.NON_NULL)

@@ -2,6 +2,7 @@ package dev.me.hr.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,14 +49,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 			// TODO throw custom exception
 			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
 		}
-		EmployeeDTO employeeDTO = new EmployeeDTO(employeeEntity.getId(), employeeEntity.getFullName(),
-				employeeEntity.getAge(), employeeEntity.getState());
-
-		EmployeeState employeeState = employeeStateMachineManager.getState(employeeID);
-		employeeDTO.setState(employeeState);
-		if (employeeState.equals(EmployeeState.IN_CHECK)) {
-			employeeDTO.setStates(employeeStateMachineManager.getStates(employeeID));
-		}
+		EmployeeDTO employeeDTO = convertEntityToDTO(employeeEntity);
 		return employeeDTO;
 	}
 
@@ -75,14 +69,14 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 
 	@Override
 	public List<EmployeeDTO> getAllEmployees() {
-		List<Employee> employees = getAllEmployeesEntity();
-		return convertEntitiesToDTOs(employees);
+		return getAllEmployeesEntity().stream().map(emplyee -> convertEntityToDTO(emplyee))
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<EmployeeDTO> getAllEmployeesByState(EmployeeState employeeState) {
-		List<Employee> employees = getEmployeesEntityByState(employeeState);
-		return convertEntitiesToDTOs(employees);
+		return getEmployeesEntityByState(employeeState).stream().map(emplyee -> convertEntityToDTO(emplyee))
+				.collect(Collectors.toList());
 	}
 
 	private Employee getEmployeeEntity(Long employeeID) {
@@ -97,16 +91,15 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		return employeeManageRepository.getEmployesByState(employeeState);
 	}
 
-	private List<EmployeeDTO> convertEntitiesToDTOs(List<Employee> employees) {
-		List<EmployeeDTO> employeeDTOs = new ArrayList<EmployeeDTO>();
-		if (employees != null) {
-			for (Employee employee : employees) {
-				EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getFullName(), employee.getAge(),
-						employee.getState());
-				employeeDTOs.add(employeeDTO);
-			}
+	private EmployeeDTO convertEntityToDTO(Employee employee) {
+		EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getFullName(), employee.getAge(),
+				employee.getState());
+		EmployeeState employeeState = employeeStateMachineManager.getState(employee.getId());
+		if (employeeState.equals(EmployeeState.IN_CHECK)) {
+			employeeDTO.setStates(employeeStateMachineManager.getStates(employee.getId()));
+			employeeDTO.setState(null);
 		}
-		return employeeDTOs;
+		return employeeDTO;
 	}
 
 }
