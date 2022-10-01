@@ -16,6 +16,7 @@
 	<description>employee registration management system</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring.statemachine>3.2.0</spring.statemachine>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,6 +55,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.statemachine</groupId>
+			<artifactId>spring-statemachine-core</artifactId>
+			<version>${spring.statemachine}</version>
 		</dependency>
 		
 	</dependencies>

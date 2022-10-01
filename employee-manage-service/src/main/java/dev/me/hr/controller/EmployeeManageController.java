@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.me.hr.dto.EmployeeDTO;
+import dev.me.hr.model.EmployeeEvent;
 import dev.me.hr.model.EmployeeState;
 import dev.me.hr.service.EmployeeManageService;
 
@@ -40,8 +41,8 @@ public class EmployeeManageController {
 		return employeeManageService.getAllEmployeesByState(employeeState);
 	}
 
-	@RequestMapping(value = "/employee/{employeeID}", method = RequestMethod.PUT, headers = "Accept=application/json")
-	public void updateEmployeeToNextState(@RequestParam Long employeeID) {
-		employeeManageService.updateEmployeeToNextState(employeeID);
+	@RequestMapping(value = "/employee", method = RequestMethod.PUT, headers = "Accept=application/json")
+	public void updateEmployeeToNextState(@RequestParam Long employeeID, @RequestParam EmployeeEvent employeeEvent) {
+		employeeManageService.updateEmployeeState(employeeID, employeeEvent);
 	}
 }

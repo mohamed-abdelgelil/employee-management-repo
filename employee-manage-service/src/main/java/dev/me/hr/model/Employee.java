@@ -1,5 +1,7 @@
 package dev.me.hr.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -8,8 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Employee {
+public class Employee implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8140591674171645968L;
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

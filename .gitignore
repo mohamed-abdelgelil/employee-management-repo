@@ -5,3 +5,4 @@ employee-manage-service/mvnw
 employee-manage-service/mvnw.cmd
 employee-manage-service/.mvn/wrapper/maven-wrapper.jar
 *.jar
+employee-manage-service/.mvn/wrapper/maven-wrapper.jar
