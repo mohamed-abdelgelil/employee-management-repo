@@ -12,7 +12,7 @@ import dev.me.hr.model.EmployeeState;
 @Repository
 public interface EmployeeManageRepository extends JpaRepository<Employee, Long> {
 
-	@Query("SELECT E FROM Employee E WHERE E.id =?1")
+	@Query("SELECT E FROM Employee E WHERE E.id = ?1")
 	Employee getEmployeeByID(Long employeeID);
 
 	@Query("SELECT E FROM Employee E")

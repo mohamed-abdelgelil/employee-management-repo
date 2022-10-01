@@ -1,22 +1,14 @@
 package dev.me.hr.model;
 
 public enum EmployeeState {
-	
-	ADDED("ADDED"), 
-	IN_CHECK("IN_CHECK"), 
-	APPROVED("APPROVED"), 
-	ACTIVE("ACTIVE");
-	
-	
-	private EmployeeState(String name) {
-		this.name = name;
-	}
-
-	private String name;
-	
-	public String getName() {
-		return this.name;
-	}
-	
+	ADDED, 
+	IN_CHECK, 
+	SECURITY_CHECK_STARTED,
+	SECURITY_CHECK_FINISHED,
+	WORK_PERMIT_CHECK_STARTED,
+	WORK_PERMIT_CHECK_PENDING_VERIFICATION,
+	WORK_PERMIT_CHECK_FINISHED,
+	APPROVED, 
+	ACTIVE;
 
 }

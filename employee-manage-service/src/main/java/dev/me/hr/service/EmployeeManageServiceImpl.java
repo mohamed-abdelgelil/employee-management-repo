@@ -2,19 +2,22 @@ package dev.me.hr.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.me.hr.dto.EmployeeDTO;
 import dev.me.hr.model.Employee;
+import dev.me.hr.model.EmployeeEvent;
 import dev.me.hr.model.EmployeeState;
 import dev.me.hr.repository.EmployeeManageRepository;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class EmployeeManageServiceImpl implements EmployeeManageService {
+
+	@Autowired
+	private EmployeeStateMachineManager employeeStateMachineManager;
 
 	private EmployeeManageRepository employeeManageRepository;
 
@@ -26,10 +29,14 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 
 	@Override
 	public EmployeeDTO registerEmployee(EmployeeDTO employeeDTO) {
-		// Initially when Employee is added, it is assigned ADDED state automatically
+		// Save the DB Entity
 		Employee employeeEntity = new Employee(employeeDTO.getFullName(), employeeDTO.getAge(), EmployeeState.ADDED);
 		employeeManageRepository.save(employeeEntity);
 
+		// Initiate the Employee Statemachine
+		employeeStateMachineManager.initStateMachine(employeeEntity);
+
+		// Return the EmployeeDTO
 		employeeDTO.setId(employeeEntity.getId());
 		employeeDTO.setState(employeeEntity.getState());
 		return employeeDTO;
@@ -39,35 +46,37 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 	public EmployeeDTO getEmployee(Long employeeID) {
 		Employee employeeEntity = getEmployeeEntity(employeeID);
 		if (employeeEntity == null) {
-			// TODO throw exception
+			// TODO throw custom exception
+			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
 		}
-		EmployeeDTO employeeDTO = new EmployeeDTO(employeeEntity.getId(), employeeEntity.getFullName(),
-				employeeEntity.getAge(), employeeEntity.getState());
+		EmployeeDTO employeeDTO = convertEntityToDTO(employeeEntity);
 		return employeeDTO;
 	}
 
 	// Handle the Emplyoee State Transitions
 	@Override
-	public void updateEmployeeToNextState(Long employeeID) {
+	public void updateEmployeeState(Long employeeID, EmployeeEvent employeeEvent) {
 		Employee employeeEntity = getEmployeeEntity(employeeID);
 		if (employeeEntity == null) {
-			// TODO throw exception
+			// TODO throw custom exception
+			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
 		}
-		employeeEntity.setState(EmployeeState.IN_CHECK);
+		employeeStateMachineManager.fireEvent(employeeID, employeeEvent);
+		employeeEntity.setState(employeeStateMachineManager.getState(employeeID));
 		employeeManageRepository.save(employeeEntity);
 
 	}
 
 	@Override
 	public List<EmployeeDTO> getAllEmployees() {
-		List<Employee> employees = getAllEmployeesEntity();
-		return convertEntitiesToDTOs(employees);
+		return getAllEmployeesEntity().stream().map(emplyee -> convertEntityToDTO(emplyee))
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<EmployeeDTO> getAllEmployeesByState(EmployeeState employeeState) {
-		List<Employee> employees = getEmployeesEntityByState(employeeState);
-		return convertEntitiesToDTOs(employees);
+		return getEmployeesEntityByState(employeeState).stream().map(emplyee -> convertEntityToDTO(emplyee))
+				.collect(Collectors.toList());
 	}
 
 	private Employee getEmployeeEntity(Long employeeID) {
@@ -82,16 +91,15 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		return employeeManageRepository.getEmployesByState(employeeState);
 	}
 
-	private List<EmployeeDTO> convertEntitiesToDTOs(List<Employee> employees) {
-		List<EmployeeDTO> employeeDTOs = new ArrayList<EmployeeDTO>();
-		if (employees != null && employees.size() > 0) {
-			for (Employee employee : employees) {
-				EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getFullName(), employee.getAge(),
-						employee.getState());
-				employeeDTOs.add(employeeDTO);
-			}
+	private EmployeeDTO convertEntityToDTO(Employee employee) {
+		EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getFullName(), employee.getAge(),
+				employee.getState());
+		EmployeeState employeeState = employeeStateMachineManager.getState(employee.getId());
+		if (employeeState.equals(EmployeeState.IN_CHECK)) {
+			employeeDTO.setStates(employeeStateMachineManager.getStates(employee.getId()));
+			employeeDTO.setState(null);
 		}
-		return employeeDTOs;
+		return employeeDTO;
 	}
 
 }
