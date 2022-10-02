@@ -81,7 +81,8 @@ public class EmployeeSatateMachineConfig extends EnumStateMachineConfigurerAdapt
 
 			@Override
 			public void stateChanged(State<EmployeeState, EmployeeEvent> from, State<EmployeeState, EmployeeEvent> to) {
-				System.out.println("Employee State changed to " + to.getId());
+				//Commented as it's already handled at the service Layer
+				//System.out.println("Employee State changed to " + to.getId());
 			}
 
 		};

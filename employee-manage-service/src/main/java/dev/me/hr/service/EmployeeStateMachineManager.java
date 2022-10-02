@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.stereotype.Component;
 
+import dev.me.hr.config.exception.TransitionException;
 import dev.me.hr.model.Employee;
 import dev.me.hr.model.EmployeeEvent;
 import dev.me.hr.model.EmployeeState;
@@ -37,8 +37,8 @@ public class EmployeeStateMachineManager {
 	public EmployeeState fireEvent(Long employeeId, EmployeeEvent employeeEvent) {
 		validateOnAvtivation(employeeId, employeeEvent);
 		if(!stateMachineMap.get(employeeId).sendEvent(employeeEvent)) {
-			// TODO throw Custom Exception
-			throw new RuntimeException("Not A Valid Transition " + employeeEvent + " After " + getState(employeeId));
+			// TODO add messages to properties file
+			throw new TransitionException("trans0002","Not A Valid Transition " + employeeEvent + " After " + getState(employeeId));
 		}
 		return getState(employeeId);
 	}

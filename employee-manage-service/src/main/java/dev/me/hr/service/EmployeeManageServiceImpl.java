@@ -1,12 +1,12 @@
 package dev.me.hr.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.me.hr.config.exception.TransitionException;
 import dev.me.hr.dto.EmployeeDTO;
 import dev.me.hr.model.Employee;
 import dev.me.hr.model.EmployeeEvent;
@@ -39,6 +39,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		// Return the EmployeeDTO
 		employeeDTO.setId(employeeEntity.getId());
 		employeeDTO.setState(employeeEntity.getState());
+		System.out.println("Employee State changed to " + employeeEntity.getState());
 		return employeeDTO;
 	}
 
@@ -46,8 +47,8 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 	public EmployeeDTO getEmployee(Long employeeID) {
 		Employee employeeEntity = getEmployeeEntity(employeeID);
 		if (employeeEntity == null) {
-			// TODO throw custom exception
-			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
+			// TODO add messages to properties file
+			throw new TransitionException("trans0001","Not A Valid Emplyee ID " + employeeID);
 		}
 		EmployeeDTO employeeDTO = convertEntityToDTO(employeeEntity);
 		return employeeDTO;
@@ -58,11 +59,17 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 	public void updateEmployeeState(Long employeeID, EmployeeEvent employeeEvent) {
 		Employee employeeEntity = getEmployeeEntity(employeeID);
 		if (employeeEntity == null) {
-			// TODO throw custom exception
-			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
+			// TODO add messages to properties file
+			throw new TransitionException("trans0001","Not A Valid Emplyee ID " + employeeID);
 		}
 		employeeStateMachineManager.fireEvent(employeeID, employeeEvent);
-		employeeEntity.setState(employeeStateMachineManager.getState(employeeID));
+		EmployeeState employeeState = employeeStateMachineManager.getState(employeeID);
+		employeeEntity.setState(employeeState);
+		if(!employeeState.equals(EmployeeState.IN_CHECK)){
+			System.out.println("Employee State changed to " + employeeState);
+		}else {
+			System.out.println("Employee State changed to " + employeeStateMachineManager.getStates(employeeID));
+		}
 		employeeManageRepository.save(employeeEntity);
 
 	}
