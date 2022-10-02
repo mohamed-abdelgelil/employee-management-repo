@@ -1,6 +1,5 @@
 package dev.me.employee;
 
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import dev.me.hr.EmployeeManageServiceApplication;
+import dev.me.hr.config.exception.TransitionException;
 import dev.me.hr.dto.EmployeeDTO;
 import dev.me.hr.model.EmployeeEvent;
 import dev.me.hr.model.EmployeeState;
@@ -165,7 +165,7 @@ class EmployeeManageServiceApplicationTests {
 		assertTrue(employeeManageServiceImpl.getEmployee(employeeDTO.getId()).getStates().containsAll(finishSecState));
 		
 		//4.Update state of the employee to ACTIVE
-		assertThrows(RuntimeException.class,() -> {updateState(employeeDTO.getId(), EmployeeEvent.ACTIVATE);});
+		assertThrows(TransitionException.class,() -> {updateState(employeeDTO.getId(), EmployeeEvent.ACTIVATE);});
 		
 		
 	}
@@ -192,7 +192,7 @@ class EmployeeManageServiceApplicationTests {
 		assertTrue(employeeManageServiceImpl.getEmployee(employeeDTO.getId()).getStates().containsAll(finishSecState));
 		
 		//4.Update substate of IN-CHECK state the employee to WORK_PERMIT_CHECK_FINISHED
-		assertThrows(RuntimeException.class,() -> {updateState(employeeDTO.getId(), EmployeeEvent.FINISH_WORK_PERMIT_CHECK);});
+		assertThrows(TransitionException.class,() -> {updateState(employeeDTO.getId(), EmployeeEvent.FINISH_WORK_PERMIT_CHECK);});
 				
 	}
 	
