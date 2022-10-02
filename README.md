@@ -18,10 +18,12 @@ Events:
 
 **Technologies:-**
 
-    1- Spring Boot
-    2- Spring stateMachine
-    3- springdoc-openapi-ui
-    4- H2 DB inMemory
+
+    1- Java 11
+    2- Spring Boot
+    3- Spring stateMachine
+    4- springdoc-openapi-ui
+    5- H2 DB inMemory
     
  
  **How to Use:-**
@@ -30,9 +32,23 @@ Events:
  
      - URL: http://localhost:8080/{servicePath}
      - ex: http://localhost:8080/employee
-
-- The Application is Supported with OpenAPI Lib which view the API document in an html page 
+     
+- You can Check application rest API document using the OpenAPI url
     - URL: http://localhost:8080/swagger-ui/index.html
     
 - Also you Can find a postman collection attachec inside the repository wihch include some samlpes that you can use to test rest APIs
-    - path 
+    - URL: https://github.com/mohamed-abdelgelil/employee-management-repo/blob/develop/employee_state_management.postman_collection.json
+    - Hint:
+        - make sure to add a variable to the global section called "employeeID" as it is used inside all the servces and it's value is modified after the employee registration success
+        - you can use the postman run to execute the collection in a sequential
+        
+        
+**Test:-**
+
+All the Test Cases is implemented using spring boot test including the happy & unhappy scenarios
+
+
+**Second Part (Optional but a plus)-**
+
+
+**Third Part (Optional but a plus)-**
