@@ -45,14 +45,27 @@ All the Test Cases is implemented including the happy & unhappy scenarios
     - Reload state machine for each employee at the real time
     - State to be dynamic based on a configuration file or a database table
 - Code & Design
-    - logging need to be enhanced on different levels
-    - use mapstsruc for objects conversion
+    - Logging need to be enhanced on different levels
+    - Use mapstsruc for objects conversion
 - Test
-    - need more unit tests for service layer with a MOC
-    - need more unit tests for controller layer with a MVC MOC
+    - Need more unit tests for service layer with a MOC
+    - Need more unit tests for controller layer with a MVC MOC
 
 
 **Production Readiness Criteria**
+- App
+    - Add a profile for each environment (developmet, production)
+    - Add Caching tool to enhance the performance and may be used for session management   
+- Environmemt
+    - Use a stable Database Engine like (oracle) or even a nosql database based on the amount of data and its structre
+    - Also you need to maintain the database replica using 3D party (oracel embeded) tool or manullay be the code
+    - Use a high availability installtion with a loadbalancer (hard/software)
+    - Use a messageing tool (kafka, activeMq) for integration with other services with a persistant store (to avoid data lose)
+    - Use Kubernates to orchestrate on the docker images based on the configured logic
+    - API Gateway & Service Discovery
+    - External Configuration Server
+    - Use a CI/CD Pipeline
+    - Use a monitor tool like (spring boot actuator) or you can build the ELK stack with extra logging details (requitID) to monitor all the requests life cycle
 
 
 **Integration Solutions**
