@@ -54,7 +54,7 @@
 		{
 			"name": "BEGIN_CHECK Employee State",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
@@ -87,7 +87,7 @@
 		{
 			"name": "COMPLETE_INITIAL_WORK_PERMIT_CHECK Employee State",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
@@ -120,7 +120,7 @@
 		{
 			"name": "FINISH_SECURITY_CHECK Employee State",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
@@ -153,7 +153,7 @@
 		{
 			"name": "FINISH_WORK_PERMIT_CHECK Employee State",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
@@ -186,7 +186,7 @@
 		{
 			"name": "ACTIVATE Employee State",
 			"request": {
-				"method": "PUT",
+				"method": "PATCH",
 				"header": [],
 				"body": {
 					"mode": "urlencoded",
