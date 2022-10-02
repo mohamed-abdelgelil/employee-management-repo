@@ -70,6 +70,24 @@ All the Test Cases is implemented including the happy & unhappy scenarios
 
 ### **Integration Solutions**
    #### Option #1
+        - As the Objective of the integration is Statics services that based on database queries, we can set the integration on the database level
+        - we can have 2 approches here
+        
+        Approach #1
+            1. Using a relational DB straming tool replicate all the data on another DB node in a periodic time
+            2. Create a read only user on the other node
+            3. the statistics services can access the replica DB usingthe created user and perform all statistics, queries, and reports
+            
+        Approach #2    
+            1. Build a an inteerceptor layer on the top of the JPA layer
+            2. intercept all saved entries on another configured datastore
+            3. here we can choose between a nosql or sql db and customize the data struture which may facilitate the statisitcs service and enhance the queries performance
+            
+        Option #1 Advantages:
+            - no implementation need especially approach #1 
+            - save data concistansy & no datalose
+            - data secured with the read only
+            - replica db can be reusable in other features
     
    #### Option #2
     
