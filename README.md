@@ -54,7 +54,7 @@ All the Test Cases is implemented including the happy & unhappy scenarios
 
 **Production Readiness Criteria**
 - App
-    - Add a profile for each environment (developmet, production)
+    - Add a profile for each environment (developmet, testing, production)
     - Add Caching tool to enhance the performance and may be used for session management   
 - Environmemt
     - Use a stable Database Engine like (oracle) or even a nosql database based on the amount of data and its structre
