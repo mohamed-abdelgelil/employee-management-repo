@@ -45,10 +45,10 @@ Events:
         
 **Test:-**
 
-All the Test Cases is implemented using spring boot test including the happy & unhappy scenarios
+All the Test Cases is implemented including the happy & unhappy scenarios
 
 
-**Second Part (Optional but a plus)-**
+**Second Part (Optional but a plus):-**
 
 
 **Third Part (Optional but a plus)-**
