@@ -2,6 +2,7 @@ package dev.me.hr.dto;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -17,10 +18,10 @@ public class EmployeeDTO implements Serializable {
 	private Long id;
 	private String fullName;
 	private int age;
-	
+
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private EmployeeState state;
-	
+
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private List<EmployeeState> states;
 
@@ -72,8 +73,28 @@ public class EmployeeDTO implements Serializable {
 		this.states = states;
 	}
 
-	
-	
-	
+	@Override
+	public String toString() {
+		return "EmployeeDTO [id=" + id + ", fullName=" + fullName + ", age=" + age + ", state=" + state + ", states="
+				+ states + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(age, fullName, id, state, states);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmployeeDTO other = (EmployeeDTO) obj;
+		return age == other.age && Objects.equals(fullName, other.fullName) && Objects.equals(id, other.id)
+				&& state == other.state && Objects.equals(states, other.states);
+	}
 
 }
