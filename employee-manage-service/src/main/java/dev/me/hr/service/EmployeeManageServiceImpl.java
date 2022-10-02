@@ -1,6 +1,5 @@
 package dev.me.hr.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +38,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		// Return the EmployeeDTO
 		employeeDTO.setId(employeeEntity.getId());
 		employeeDTO.setState(employeeEntity.getState());
+		System.out.println("Employee State changed to " + employeeEntity.getState());
 		return employeeDTO;
 	}
 
@@ -62,7 +62,13 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 			throw new RuntimeException("Not A Valid Emplyee ID " + employeeID);
 		}
 		employeeStateMachineManager.fireEvent(employeeID, employeeEvent);
-		employeeEntity.setState(employeeStateMachineManager.getState(employeeID));
+		EmployeeState employeeState = employeeStateMachineManager.getState(employeeID);
+		employeeEntity.setState(employeeState);
+		if(!employeeState.equals(EmployeeState.IN_CHECK)){
+			System.out.println("Employee State changed to " + employeeState);
+		}else {
+			System.out.println("Employee State changed to " + employeeStateMachineManager.getStates(employeeID));
+		}
 		employeeManageRepository.save(employeeEntity);
 
 	}
