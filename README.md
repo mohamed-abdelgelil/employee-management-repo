@@ -88,7 +88,15 @@ All the Test Cases is implemented including the happy & unhappy scenarios
             - save data concistansy & no datalose
             - data secured with the read only
             - replica db can be reusable in other features
+            - no hits on the live database that may affect the system main functionalities
     
    #### Option #2
+        - We can expose a get rest api from inside our service to getall employees
+        - the service can be used by the statistics users with a limited privilages
+        - then they can save the result in a temp store to be cleaned after finish statistics
     
    #### Option #3
+        - we can exopse a start get rest api to start its function asynchronusly
+        - once the service gets hit it will start a new thread and start get result in patches in side it
+        - then send the result patch by patch on a messaging tool asynchronusly to be fetched one by one at the other side
+        - and to avoid the data lose and consistancy it is recomended to set a presistant store with message tool
