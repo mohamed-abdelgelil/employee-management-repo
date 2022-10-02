@@ -1,0 +1,7 @@
+version: '3.7'
+services:
+  employee:
+    build: .
+    restart: always
+    ports:
+      - 8080:8080
