@@ -39,7 +39,7 @@ All the Test Cases is implemented including the happy & unhappy scenarios
 
 ## Other Requirments
 
-**Review Comments**
+### **Review Comments**
 - Features
     - Maintain the state history is missed
     - Reload state machine for each employee at the real time
@@ -52,13 +52,13 @@ All the Test Cases is implemented including the happy & unhappy scenarios
     - Need more unit tests for controller layer with a MVC MOC
 
 
-**Production Readiness Criteria**
+### **Production Readiness Criteria**
 - App
     - Add a profile for each environment (developmet, testing, production)
     - Add Caching tool to enhance the performance and may be used for session management   
 - Environmemt
-    - Use a stable Database Engine like (oracle) or even a nosql database based on the amount of data and its structre
-    - Also you need to maintain the database replica using 3D party (oracel embeded) tool or manullay be the code
+    - Use a stable Database Engine like (oracle) or even a nosql database based on the amount of data and its structure
+    - Also you need to maintain the database replica using 3D party (oracel embeded) tool or manullay by the code
     - Use a high availability installtion with a loadbalancer (hard/software)
     - Use a messageing tool (kafka, activeMq) for integration with other services with a persistant store (to avoid data lose)
     - Use Kubernates to orchestrate on the docker images based on the configured logic
@@ -68,4 +68,9 @@ All the Test Cases is implemented including the happy & unhappy scenarios
     - Use a monitor tool like (spring boot actuator) or you can build the ELK stack with extra logging details (requitID) to monitor all the requests life cycle
 
 
-**Integration Solutions**
+### **Integration Solutions**
+   #### Option #1
+    
+   #### Option #2
+    
+   #### Option #3
