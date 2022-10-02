@@ -1,6 +1,8 @@
 package dev.me.hr.config.statemachine;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.Message;
@@ -17,12 +19,14 @@ import org.springframework.statemachine.state.State;
 
 import dev.me.hr.model.EmployeeEvent;
 import dev.me.hr.model.EmployeeState;
+import dev.me.hr.service.EmployeeManageServiceImpl;
 
 @Configuration
 @EnableStateMachineFactory
 public class EmployeeSatateMachineConfig extends EnumStateMachineConfigurerAdapter<EmployeeState, EmployeeEvent> {
 
-	
+	//private static final Logger LOG = LoggerFactory.getLogger(EmployeeSatateMachineConfig.class);
+
 	
 	@Override
 	public void configure(StateMachineConfigurationConfigurer<EmployeeState, EmployeeEvent> config) throws Exception {
@@ -82,7 +86,7 @@ public class EmployeeSatateMachineConfig extends EnumStateMachineConfigurerAdapt
 			@Override
 			public void stateChanged(State<EmployeeState, EmployeeEvent> from, State<EmployeeState, EmployeeEvent> to) {
 				//Commented as it's already handled at the service Layer
-				//System.out.println("Employee State changed to " + to.getId());
+				//LOG.info("Employee State changed to " + to.getId());
 			}
 
 		};

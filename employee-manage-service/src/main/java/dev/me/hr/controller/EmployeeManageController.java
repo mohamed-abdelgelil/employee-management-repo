@@ -42,8 +42,8 @@ public class EmployeeManageController {
 		return employeeManageService.getAllEmployeesByState(employeeState);
 	}
 
-	@RequestMapping( method = RequestMethod.PUT, headers = "Accept=application/json")
-	public void updateEmployeeToNextState(@RequestParam Long employeeID, @RequestParam EmployeeEvent employeeEvent) {
+	@RequestMapping( method = RequestMethod.PATCH, headers = "Accept=application/json")
+	public void updateEmployeeState(@RequestParam Long employeeID, @RequestParam EmployeeEvent employeeEvent) {
 		employeeManageService.updateEmployeeState(employeeID, employeeEvent);
 	}
 }

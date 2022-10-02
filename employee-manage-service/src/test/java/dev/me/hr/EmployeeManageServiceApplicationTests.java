@@ -1,4 +1,4 @@
-package dev.me.employee;
+package dev.me.hr;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,6 +22,8 @@ import dev.me.hr.service.EmployeeManageServiceImpl;
 
 @SpringBootTest(classes = EmployeeManageServiceApplication.class)
 class EmployeeManageServiceApplicationTests {
+	
+	
 
 	@Autowired
 	EmployeeManageServiceImpl employeeManageServiceImpl;
@@ -29,7 +31,7 @@ class EmployeeManageServiceApplicationTests {
 	//Happy path scenarios :)
 	
 	@Test
-	void happey_scenario_1() {//Scenario #1
+	void happey_scenario_1() {
 		
 		//1.create an employee
 		EmployeeDTO employeeDTO = createEmployee();
@@ -66,7 +68,7 @@ class EmployeeManageServiceApplicationTests {
 	}
 	
 	@Test
-	void happey_scenario_2() {//Scenario #2
+	void happey_scenario_2() {
 		
 		//1.create an employee
 		EmployeeDTO employeeDTO = createEmployee();
@@ -104,7 +106,7 @@ class EmployeeManageServiceApplicationTests {
 	}
 	
 	@Test
-	void happey_scenario_3() {//Scenario #3
+	void happey_scenario_3() {
 		
 		//1.create an employee
 		EmployeeDTO employeeDTO = createEmployee();
@@ -147,7 +149,7 @@ class EmployeeManageServiceApplicationTests {
 	//Unhappy path scenarios :(
 	
 	@Test
-	void unhappey_scenario_1() {//Scenario #1
+	void unhappey_scenario_1() {
 		//1.create an employee
 		EmployeeDTO employeeDTO = createEmployee();
 		assertEquals(EmployeeState.ADDED, employeeManageServiceImpl.getEmployee(employeeDTO.getId()).getState());
@@ -170,11 +172,8 @@ class EmployeeManageServiceApplicationTests {
 		
 	}
 	
-	/**
-	 * 
-	 */
 	@Test
-	void unhappey_scenario_2() {//Scenario #2
+	void unhappey_scenario_2() {
 		//1.create an employee
 		EmployeeDTO employeeDTO = createEmployee();
 		assertEquals(EmployeeState.ADDED, employeeManageServiceImpl.getEmployee(employeeDTO.getId()).getState());
