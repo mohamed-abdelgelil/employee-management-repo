@@ -40,6 +40,16 @@ All the Test Cases is implemented including the happy & unhappy scenarios
 ## Other Requirments
 
 **Review Comments**
+- Features
+    - Maintain the state history is missed
+    - Reload state machine for each employee at the real time
+    - State to be dynamic based on a configuration file or a database table
+- Code & Design
+    - logging need to be enhanced on different levels
+    - use mapstsruc for objects conversion
+- Test
+    - need more unit tests for service layer with a MOC
+    - need more unit tests for controller layer with a MVC MOC
 
 
 **Production Readiness Criteria**
