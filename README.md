@@ -2,10 +2,10 @@
 
 Managing employee state transition, Usin the following States and Events
 
-![state_transition_diagram](https://github.com/mohamed-abdelgelil/employee-management-repo/raw/main/requirments/state_transition_diagram.png)
+<img src="https://github.com/mohamed-abdelgelil/employee-management-repo/raw/main/requirments/state_transition_diagram.png" alt="state_transition_diagram" width="500" height="700">
 
 
-**Technologies:-**
+**Technologies**
 
 
     1- Java 11
@@ -15,7 +15,7 @@ Managing employee state transition, Usin the following States and Events
     5- H2 DB inMemory
     
  
- ## **How to Use:-**
+ ## **How to Use**
  
 - The application can be used as an executable file exported using spring boot with an embeded tomcat using a pre-configured port "8080"
  
@@ -32,17 +32,17 @@ Managing employee state transition, Usin the following States and Events
         - you can use the postman run to execute the collection in a sequential
         
         
-## **Test:-**
+## **Test**
 
 All the Test Cases is implemented including the happy & unhappy scenarios
 
 
 ## Other Requirments
 
-**Review Comments:-**
+**Review Comments**
 
 
-**Production Readiness Criteria:-**
+**Production Readiness Criteria**
 
 
-**Integration Solutions-**
+**Integration Solutions**
