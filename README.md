@@ -2,19 +2,8 @@
 
 Managing employee state transition, Usin the following States and Events
 
-States:
-- `ADDED`
-- `IN-CHECK`
-  - `SECURITY_CHECK_STARTED`
-  - `SECURITY_CHECK_FINISHED`
-  - `WORK_PERMIT_CHECK_STARTED`
-  - `WORK_PERMIT_CHECK_PENDING_VERIFICATION`
-  - `WORK_PERMIT_CHECK_FINISHED`
-- `APPROVED`
-- `ACTIVE`  
+![state_transition_diagram](https://github.com/mohamed-abdelgelil/employee-management-repo/raw/main/requirments/state_transition_diagram.png)
 
-Events:
-`BEGIN CHECK`, `FINISH SECURITY CHECK`, `COMPLETE INITIAL WORK PERMIT CHECK`, `FINISH WORK PERMIT CHECK`, `ACTIVATE`
 
 **Technologies:-**
 
