@@ -2,7 +2,7 @@
 
 Managing employee state transition, Usin the following States and Events
 
-![state_transition_diagram](https://github.com/mohamed-abdelgelil/employee-management-repo/raw/main/requirments/state_transition_diagram.png)
+![state_transition_diagram](https://github.com/mohamed-abdelgelil/employee-management-repo/raw/main/requirments/state_transition_diagram.png =200x300)
 
 
 **Technologies:-**
